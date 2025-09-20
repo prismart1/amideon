@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeos - CRM & Email Marketing Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-left: 1rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: #2563eb;
+            background: #f0f7ff;
+        }
+
+        /* Main Content */
+        .main {
+            padding: 2rem 0;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 4px solid #2563eb;
+        }
+
+        .kpi-title {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-change {
+            font-size: 0.875rem;
+            color: #059669;
+            font-weight: 500;
+        }
+
+        /* Campaign Table */
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .table-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-paused {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Email Builder */
+        .builder-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .builder-sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .builder-main {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #e5e7eb;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #2563eb;
+            border: 1px solid #2563eb;
+        }
+
+        .btn-secondary:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav {
+                gap: 1rem;
+            }
+
+            .builder-container {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div style="display: flex; align-items: center;">
+                    <div class="logo">📊 Adeos</div>
+                    <div class="tagline">Beyond Email Marketing - We Orchestrate Customer Journeys</div>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="active" onclick="showSection('dashboard')">Dashboard</a>
+                    <a href="#" onclick="showSection('campaigns')">Campaigns</a>
+                    <a href="#" onclick="showSection('analytics')">Analytics</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="page-section active">
+                <h1 class="page-title">Marketing Dashboard</h1>
+                <p class="page-subtitle">Overview of your email marketing performance</p>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Total Subscribers</div>
+                        <div class="kpi-value" id="subscribers">24,847</div>
+                        <div class="kpi-change">↗ +12% this month</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-title">Open Rate</div>
+                        <div class="kpi-value" id="open-rate">28.3%</div>
+                        <div class="kpi-change">↗ +3.2% from last month</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-title">Click Rate</div>
+                        <div class="kpi-value" id="click-rate">4.7%</div>
+                        <div class="kpi-change">↗ +1.8% from last month</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-title">Revenue</div>
+                        <div class="kpi-value" id="revenue">$47,320</div>
+                        <div class="kpi-change">↗ +18% this month</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Recent Campaigns</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campaign</th>
+                                <th>Status</th>
+                                <th>Sent</th>
+                                <th>Opens</th>
+                                <th>Clicks</th>
+                                <th>Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Summer Sale Announcement</strong></td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>12,450</td>
+                                <td>28.3%</td>
+                                <td>6.7%</td>
+                                <td>$18,940</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Welcome Email Series</strong></td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>3,287</td>
+                                <td>31.2%</td>
+                                <td>8.4%</td>
+                                </tr>
+                            <tr>
+                                <td><strong>Cart Abandonment Recovery</strong></td>
+                                <td><span class="status-badge status-paused">Paused</span></td>
+                                <td>1,892</td>
+                                <td>42.1%</td>
+                                <td>12.3%</td>
+                                <td>$8,340</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Campaigns Section -->
+            <div id="campaigns" class="page-section">
+                <h1 class="page-title">Email Campaigns</h1>
+                <p class="page-subtitle">Create and manage your email marketing campaigns</p>
+
+                <div style="margin-bottom: 2rem;">
+                    <button class="btn">📧 New Campaign</button>
+                    <button class="btn btn-secondary" style="margin-left: 1rem;">📁 Templates</button>
+                </div>
+
+                <div class="builder-container">
+                    <div class="builder-sidebar">
+                        <h3 style="margin-bottom: 1rem;">Campaign Settings</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Campaign Name</label>
+                            <input type="text" class="form-input" placeholder="Enter campaign name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Subject Line</label>
+                            <input type="text" class="form-input" placeholder="Your email subject">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Target Audience</label>
+                            <select class="form-select">
+                                <option>All Subscribers</option>
+                                <option>VIP Customers</option>
+                                <option>New Subscribers</option>
+                                <option>Inactive Users</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Send Time</label>
+                            <select class="form-select">
+                                <option>Send Now</option>
+                                <option>Schedule Later</option>
+                                <option>Drip Campaign</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" style="width: 100%; margin-top: 1rem;">🚀 Launch Campaign</button>
+                    </div>
+
+                    <div class="builder-main">
+                        <div style="text-align: center; color: #6b7280;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">✉️</div>
+                            <h3 style="margin-bottom: 1rem;">Email Builder</h3>
+                            <p>Design your email campaign with our drag-and-drop editor</p>
+                            <button class="btn" style="margin-top: 1rem;">Start Building</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analytics" class="page-section">
+                <h1 class="page-title">Performance Analytics</h1>
+                <p class="page-subtitle">Deep insights into your email marketing performance</p>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Average Open Rate</div>
+                        <div class="kpi-value">26.8%</div>
+                        <div class="kpi-change">Industry avg: 21.3%</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-title">Best Performing Day</div>
+                        <div class="kpi-value">Tuesday</div>
+                        <div class="kpi-change">32.4% open rate</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-title">Top Segment</div>
+                        <div class="kpi-value">VIP Customers</div>
+                        <div class="kpi-change">45.2% engagement</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-title">Revenue Per Email</div>
+                        <div class="kpi-value">$3.84</div>
+                        <div class="kpi-change">↗ +24% improvement</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Top Performing Campaigns</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campaign</th>
+                                <th>Open Rate</th>
+                                <th>Click Rate</th>
+                                <th>Conversion</th>
+                                <th>ROI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Cart Recovery - 1 Hour</strong></td>
+                                <td>42.1%</td>
+                                <td>12.3%</td>
+                                <td>8.7%</td>
+                                <td>340%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>VIP Customer Exclusive</strong></td>
+                                <td>38.6%</td>
+                                <td>9.4%</td>
+                                <td>6.2%</td>
+                                <td>280%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Welcome Series - Day 1</strong></td>
+                                <td>35.2%</td>
+                                <td>8.7%</td>
+                                <td>4.3%</td>
+                                <td>190%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Update nav
+            document.querySelectorAll('.nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Animate numbers on page load
+        function animateValue(element, start, end, duration) {
+            const startTime = performance.now();
+            
+            function updateValue(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const currentValue = Math.floor(progress * (end - start) + start);
+                element.textContent = currentValue.toLocaleString();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateValue);
+                }
+            }
+            
+            requestAnimationFrame(updateValue);
+        }
+
+        // Animate KPI values on load
+        window.addEventListener('load', () => {
+            const subscribers = document.getElementById('subscribers');
+            const revenue = document.getElementById('revenue');
+            
+            animateValue(subscribers, 0, 24847, 2000);
+            
+            // Animate revenue with $ prefix
+            const revenueTarget = 47320;
+            const startTime = performance.now();
+            
+            function updateRevenue(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / 2000, 1);
+                
+                const currentValue = Math.floor(progress * revenueTarget);
+                revenue.textContent = '$' + currentValue.toLocaleString();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateRevenue);
+                }
+            }
+            
+            requestAnimationFrame(updateRevenue);
+        });
+    </script>
+</body>
+</html>
