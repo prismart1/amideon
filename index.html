@@ -225,6 +225,29 @@
             font-size: 0.875rem;
         }
 
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
@@ -235,11 +258,13 @@
             font-weight: 500;
             border: none;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            font-size: 0.875rem;
         }
 
         .btn:hover {
             background: #1d4ed8;
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
@@ -253,6 +278,80 @@
             color: white;
         }
 
+        /* Contact Form Styles */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1rem;
+        }
+
+        .contact-details h4 {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-details p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
         /* Page Sections */
         .page-section {
             display: none;
@@ -262,11 +361,204 @@
             display: block;
         }
 
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-toggle:hover {
+            background: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        .chatbot-header {
+            background: #2563eb;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .message.bot .message-bubble {
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        .message.user .message-bubble {
+            background: #2563eb;
+            color: white;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .message.bot .message-avatar {
+            background: #2563eb;
+            color: white;
+        }
+
+        .message.user .message-avatar {
+            background: #6b7280;
+            color: white;
+        }
+
+        .chatbot-input-area {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+        }
+
+        .chatbot-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-send {
+            padding: 0.75rem 1rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quick-action {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-action:hover {
+            background: #f3f4f6;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
+            .chatbot-window {
+                width: 300px;
+                height: 400px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
             .header-content {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .tagline {
+                margin-left: 0;
+                text-align: center;
             }
 
             .nav {
@@ -287,7 +579,7 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <div style="display: flex; align-items: center;">
+                <div style="display: flex; align-items: center; flex-wrap: wrap;">
                     <div class="logo">📊 Adeos</div>
                     <div class="tagline">Beyond Email Marketing - We Orchestrate Customer Journeys</div>
                 </div>
@@ -295,6 +587,7 @@
                     <a href="#" class="active" onclick="showSection('dashboard')">Dashboard</a>
                     <a href="#" onclick="showSection('campaigns')">Campaigns</a>
                     <a href="#" onclick="showSection('analytics')">Analytics</a>
+                    <a href="#" onclick="showSection('contact')">Contact</a>
                 </nav>
             </div>
         </div>
@@ -363,7 +656,8 @@
                                 <td>3,287</td>
                                 <td>31.2%</td>
                                 <td>8.4%</td>
-                                </tr>
+                                <td>$5,620</td>
+                            </tr>
                             <tr>
                                 <td><strong>Cart Abandonment Recovery</strong></td>
                                 <td><span class="status-badge status-paused">Paused</span></td>
@@ -505,10 +799,158 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Contact Section -->
+            <div id="contact" class="page-section">
+                <h1 class="page-title">Get in Touch</h1>
+                <p class="page-subtitle">Ready to boost your email marketing ROI? Let's discuss how Adeos can transform your customer journeys.</p>
+
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3 style="margin-bottom: 1.5rem; color: #1f2937;">Contact Information</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>hello@adeos.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <div class="contact-details">
+                                <h4>Office</h4>
+                                <p>123 Marketing Street<br>Seattle, WA 98101</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">⏰</div>
+                            <div class="contact-details">
+                                <h4>Business Hours</h4>
+                                <p>Monday - Friday<br>9:00 AM - 6:00 PM PST</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f7ff; border-radius: 6px;">
+                            <h4 style="color: #2563eb; margin-bottom: 0.5rem;">🚀 Free Consultation</h4>
+                            <p style="color: #6b7280; font-size: 0.875rem;">Schedule a 30-minute strategy session to see how we can increase your email ROI by up to 340%.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <h3 style="margin-bottom: 1.5rem; color: #1f2937;">Send us a Message</h3>
+                        
+                        <div class="success-message" id="successMessage">
+                            ✅ Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
+                        </div>
+
+                        <!-- NETLIFY READY CONTACT FORM -->
+                        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                            <!-- Hidden fields for Netlify -->
+                            <input type="hidden" name="form-name" value="contact">
+                            
+                            <!-- Spam protection (hidden) -->
+                            <p style="display: none;">
+                                <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                            </p>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" class="form-input" name="firstName" required placeholder="John">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name *</label>
+                                    <input type="text" class="form-input" name="lastName" required placeholder="Doe">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" class="form-input" name="email" required placeholder="john@company.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Company</label>
+                                    <input type="text" class="form-input" name="company" placeholder="Your Company">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-input" name="phone" placeholder="+1 (555) 123-4567">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">How can we help you? *</label>
+                                <select class="form-select" name="inquiry" required>
+                                    <option value="">Select an option</option>
+                                    <option value="demo">Request a Demo</option>
+                                    <option value="pricing">Pricing Information</option>
+                                    <option value="integration">CRM Integration</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Message *</label>
+                                <textarea class="form-textarea" name="message" required placeholder="Tell us about your email marketing needs..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn" style="width: 100%;">Send Message 📧</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+        
+        <div class="chatbot-window" id="chatbot">
+            <div class="chatbot-header">
+                <div class="chatbot-title">Adeos Assistant</div>
+                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-bubble">
+                        Hi! I'm your Adeos marketing assistant. How can I help you today?
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-action" onclick="sendQuickMessage('How does email automation work?')">Email Automation</button>
+                    <button class="quick-action" onclick="sendQuickMessage('Show me analytics features')">Analytics</button>
+                    <button class="quick-action" onclick="sendQuickMessage('CRM integration options')">CRM Integration</button>
+                </div>
+            </div>
+            
+            <div class="chatbot-input-area">
+                <div class="chatbot-input-group">
+                    <input type="text" class="chatbot-input" id="chatInput" placeholder="Ask about our marketing features..." onkeypress="handleKeyPress(event)">
+                    <button class="chatbot-send" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Page Navigation
         function showSection(sectionName) {
             // Hide all sections
             document.querySelectorAll('.page-section').forEach(section => {
@@ -560,7 +1002,7 @@
                 const progress = Math.min(elapsed / 2000, 1);
                 
                 const currentValue = Math.floor(progress * revenueTarget);
-                revenue.textContent = '$' + currentValue.toLocaleString();
+                revenue.textContent = ' + currentValue.toLocaleString();
                 
                 if (progress < 1) {
                     requestAnimationFrame(updateRevenue);
@@ -569,6 +1011,99 @@
             
             requestAnimationFrame(updateRevenue);
         });
+
+        // Chatbot Functionality
+        let chatbotOpen = false;
+
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            const toggle = document.querySelector('.chatbot-toggle');
+            
+            chatbotOpen = !chatbotOpen;
+            
+            if (chatbotOpen) {
+                chatbot.style.display = 'flex';
+                toggle.textContent = '×';
+                setTimeout(() => {
+                    document.getElementById('chatInput').focus();
+                }, 100);
+            } else {
+                chatbot.style.display = 'none';
+                toggle.textContent = '💬';
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                // Show typing and respond
+                setTimeout(() => {
+                    const response = getBotResponse(message);
+                    addMessage(response, 'bot');
+                }, 1000);
+            }
+        }
+
+        function sendQuickMessage(message) {
+            addMessage(message, 'user');
+            
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 800);
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + sender;
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${sender === 'bot' ? '🤖' : '👤'}</div>
+                <div class="message-bubble">${text}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('automation') || lowerMessage.includes('email')) {
+                return 'Our email automation creates triggered campaigns based on customer behavior. Set up welcome series, cart abandonment, and re-engagement flows automatically!';
+            }
+            
+            if (lowerMessage.includes('analytics') || lowerMessage.includes('performance')) {
+                return 'Track open rates, click-through rates, conversions, and revenue attribution. Our dashboard shows real-time performance with advanced segmentation!';
+            }
+            
+            if (lowerMessage.includes('crm') || lowerMessage.includes('integration')) {
+                return 'Adeos integrates with Salesforce, HubSpot, Pipedrive, and 50+ CRMs. Sync data and create targeted campaigns based on CRM segments!';
+            }
+            
+            if (lowerMessage.includes('demo') || lowerMessage.includes('show')) {
+                return 'Great! You can explore our dashboard above, or contact us for a personalized demo to see how Adeos can boost your marketing ROI by up to 340%!';
+            }
+            
+            if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                return 'We offer flexible pricing starting at $29/month for small businesses, with enterprise plans available. All plans include automation, analytics, and CRM integration.';
+            }
+            
+            // Default response
+            return "That's a great question! I can help you learn about our email automation, analytics, or CRM integration features. What would you like to know more about?";
+        }
     </script>
 </body>
 </html>
