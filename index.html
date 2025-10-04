@@ -584,10 +584,10 @@
                     <div class="tagline">Beyond Email Marketing - We Orchestrate Customer Journeys</div>
                 </div>
                 <nav class="nav">
-                    <a href="#" class="active" onclick="showSection('dashboard')">Dashboard</a>
-                    <a href="#" onclick="showSection('campaigns')">Campaigns</a>
-                    <a href="#" onclick="showSection('analytics')">Analytics</a>
-                    <a href="#" onclick="showSection('contact')">Contact</a>
+                    <a href="#dashboard" class="active" onclick="showSection('dashboard', this); return false;">Dashboard</a>
+                    <a href="#campaigns" onclick="showSection('campaigns', this); return false;">Campaigns</a>
+                    <a href="#analytics" onclick="showSection('analytics', this); return false;">Analytics</a>
+                    <a href="#contact" onclick="showSection('contact', this); return false;">Contact</a>
                 </nav>
             </div>
         </div>
@@ -951,20 +951,30 @@
 
     <script>
         // Page Navigation
-        function showSection(sectionName) {
+        function showSection(sectionName, clickedElement) {
             // Hide all sections
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
             });
             
             // Show selected section
-            document.getElementById(sectionName).classList.add('active');
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
             
-            // Update nav
+            // Update nav - remove active from all
             document.querySelectorAll('.nav a').forEach(link => {
                 link.classList.remove('active');
             });
-            event.target.classList.add('active');
+            
+            // Add active to clicked link
+            if (clickedElement) {
+                clickedElement.classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         // Animate numbers on page load
