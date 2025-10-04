@@ -55,16 +55,20 @@
             gap: 2rem;
         }
 
-        .nav a {
+        .nav button {
+            background: none;
+            border: none;
             color: #6b7280;
-            text-decoration: none;
             font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 6px;
             transition: all 0.2s;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: inherit;
         }
 
-        .nav a:hover, .nav a.active {
+        .nav button:hover, .nav button.active {
             color: #2563eb;
             background: #f0f7ff;
         }
@@ -338,20 +342,6 @@
             gap: 1rem;
         }
 
-        .success-message {
-            background: #dcfce7;
-            border: 1px solid #bbf7d0;
-            color: #166534;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
         /* Page Sections */
         .page-section {
             display: none;
@@ -359,6 +349,12 @@
 
         .page-section.active {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Chatbot Styles */
@@ -402,6 +398,10 @@
             border: 1px solid #e5e7eb;
         }
 
+        .chatbot-window.open {
+            display: flex;
+        }
+
         .chatbot-header {
             background: #2563eb;
             color: white;
@@ -420,11 +420,12 @@
             background: none;
             border: none;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             padding: 0;
-            width: 24px;
-            height: 24px;
+            width: 30px;
+            height: 30px;
+            line-height: 1;
         }
 
         .chatbot-messages {
@@ -562,7 +563,14 @@
             }
 
             .nav {
-                gap: 1rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
             }
 
             .builder-container {
@@ -584,10 +592,10 @@
                     <div class="tagline">Beyond Email Marketing - We Orchestrate Customer Journeys</div>
                 </div>
                 <nav class="nav">
-                    <a href="#dashboard" class="active" onclick="showSection('dashboard', this); return false;">Dashboard</a>
-                    <a href="#campaigns" onclick="showSection('campaigns', this); return false;">Campaigns</a>
-                    <a href="#analytics" onclick="showSection('analytics', this); return false;">Analytics</a>
-                    <a href="#contact" onclick="showSection('contact', this); return false;">Contact</a>
+                    <button class="nav-btn active" data-page="dashboard">Dashboard</button>
+                    <button class="nav-btn" data-page="campaigns">Campaigns</button>
+                    <button class="nav-btn" data-page="analytics">Analytics</button>
+                    <button class="nav-btn" data-page="contact">Contact</button>
                 </nav>
             </div>
         </div>
@@ -849,17 +857,11 @@
 
                     <div class="contact-form">
                         <h3 style="margin-bottom: 1.5rem; color: #1f2937;">Send us a Message</h3>
-                        
-                        <div class="success-message" id="successMessage">
-                            ✅ Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
-                        </div>
 
                         <!-- NETLIFY READY CONTACT FORM -->
                         <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                            <!-- Hidden fields for Netlify -->
                             <input type="hidden" name="form-name" value="contact">
                             
-                            <!-- Spam protection (hidden) -->
                             <p style="display: none;">
                                 <label>Don't fill this out if you're human: <input name="bot-field"></label>
                             </p>
@@ -906,214 +908,3 @@
                             <div class="form-group">
                                 <label class="form-label">Message *</label>
                                 <textarea class="form-textarea" name="message" required placeholder="Tell us about your email marketing needs..."></textarea>
-                            </div>
-
-                            <button type="submit" class="btn" style="width: 100%;">Send Message 📧</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Chatbot -->
-    <div class="chatbot-container">
-        <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
-        
-        <div class="chatbot-window" id="chatbot">
-            <div class="chatbot-header">
-                <div class="chatbot-title">Adeos Assistant</div>
-                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
-            </div>
-            
-            <div class="chatbot-messages" id="chatMessages">
-                <div class="message bot">
-                    <div class="message-avatar">🤖</div>
-                    <div class="message-bubble">
-                        Hi! I'm your Adeos marketing assistant. How can I help you today?
-                    </div>
-                </div>
-                <div class="quick-actions">
-                    <button class="quick-action" onclick="sendQuickMessage('How does email automation work?')">Email Automation</button>
-                    <button class="quick-action" onclick="sendQuickMessage('Show me analytics features')">Analytics</button>
-                    <button class="quick-action" onclick="sendQuickMessage('CRM integration options')">CRM Integration</button>
-                </div>
-            </div>
-            
-            <div class="chatbot-input-area">
-                <div class="chatbot-input-group">
-                    <input type="text" class="chatbot-input" id="chatInput" placeholder="Ask about our marketing features..." onkeypress="handleKeyPress(event)">
-                    <button class="chatbot-send" onclick="sendMessage()">Send</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Page Navigation
-        function showSection(sectionName, clickedElement) {
-            // Hide all sections
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show selected section
-            const targetSection = document.getElementById(sectionName);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
-            
-            // Update nav - remove active from all
-            document.querySelectorAll('.nav a').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Add active to clicked link
-            if (clickedElement) {
-                clickedElement.classList.add('active');
-            }
-            
-            // Scroll to top
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        // Animate numbers on page load
-        function animateValue(element, start, end, duration) {
-            const startTime = performance.now();
-            
-            function updateValue(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                const currentValue = Math.floor(progress * (end - start) + start);
-                element.textContent = currentValue.toLocaleString();
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateValue);
-                }
-            }
-            
-            requestAnimationFrame(updateValue);
-        }
-
-        // Animate KPI values on load
-        window.addEventListener('load', () => {
-            const subscribers = document.getElementById('subscribers');
-            const revenue = document.getElementById('revenue');
-            
-            animateValue(subscribers, 0, 24847, 2000);
-            
-            // Animate revenue with $ prefix
-            const revenueTarget = 47320;
-            const startTime = performance.now();
-            
-            function updateRevenue(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / 2000, 1);
-                
-                const currentValue = Math.floor(progress * revenueTarget);
-                revenue.textContent = ' + currentValue.toLocaleString();
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateRevenue);
-                }
-            }
-            
-            requestAnimationFrame(updateRevenue);
-        });
-
-        // Chatbot Functionality
-        let chatbotOpen = false;
-
-        function toggleChatbot() {
-            const chatbot = document.getElementById('chatbot');
-            const toggle = document.querySelector('.chatbot-toggle');
-            
-            chatbotOpen = !chatbotOpen;
-            
-            if (chatbotOpen) {
-                chatbot.style.display = 'flex';
-                toggle.textContent = '×';
-                setTimeout(() => {
-                    document.getElementById('chatInput').focus();
-                }, 100);
-            } else {
-                chatbot.style.display = 'none';
-                toggle.textContent = '💬';
-            }
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (message) {
-                addMessage(message, 'user');
-                input.value = '';
-                
-                // Show typing and respond
-                setTimeout(() => {
-                    const response = getBotResponse(message);
-                    addMessage(response, 'bot');
-                }, 1000);
-            }
-        }
-
-        function sendQuickMessage(message) {
-            addMessage(message, 'user');
-            
-            setTimeout(() => {
-                const response = getBotResponse(message);
-                addMessage(response, 'bot');
-            }, 800);
-        }
-
-        function addMessage(text, sender) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message ' + sender;
-            
-            messageDiv.innerHTML = `
-                <div class="message-avatar">${sender === 'bot' ? '🤖' : '👤'}</div>
-                <div class="message-bubble">${text}</div>
-            `;
-            
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function getBotResponse(message) {
-            const lowerMessage = message.toLowerCase();
-            
-            if (lowerMessage.includes('automation') || lowerMessage.includes('email')) {
-                return 'Our email automation creates triggered campaigns based on customer behavior. Set up welcome series, cart abandonment, and re-engagement flows automatically!';
-            }
-            
-            if (lowerMessage.includes('analytics') || lowerMessage.includes('performance')) {
-                return 'Track open rates, click-through rates, conversions, and revenue attribution. Our dashboard shows real-time performance with advanced segmentation!';
-            }
-            
-            if (lowerMessage.includes('crm') || lowerMessage.includes('integration')) {
-                return 'Adeos integrates with Salesforce, HubSpot, Pipedrive, and 50+ CRMs. Sync data and create targeted campaigns based on CRM segments!';
-            }
-            
-            if (lowerMessage.includes('demo') || lowerMessage.includes('show')) {
-                return 'Great! You can explore our dashboard above, or contact us for a personalized demo to see how Adeos can boost your marketing ROI by up to 340%!';
-            }
-            
-            if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
-                return 'We offer flexible pricing starting at $29/month for small businesses, with enterprise plans available. All plans include automation, analytics, and CRM integration.';
-            }
-            
-            // Default response
-            return "That's a great question! I can help you learn about our email automation, analytics, or CRM integration features. What would you like to know more about?";
-        }
-    </script>
-</body>
-</html>
