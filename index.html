@@ -30,12 +30,24 @@
             border-bottom: 1px solid #e5e7eb;
             padding: 1rem 0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .logo {
@@ -47,35 +59,42 @@
         .tagline {
             font-size: 0.9rem;
             color: #6b7280;
-            margin-left: 1rem;
         }
 
         .nav {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .nav button {
+        .nav-btn {
             background: none;
             border: none;
             color: #6b7280;
             font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 6px;
-            transition: all 0.2s;
             cursor: pointer;
             font-size: 1rem;
             font-family: inherit;
+            transition: all 0.2s;
         }
 
-        .nav button:hover, .nav button.active {
+        .nav-btn:hover {
             color: #2563eb;
             background: #f0f7ff;
+        }
+
+        .nav-btn.active {
+            color: #2563eb;
+            background: #f0f7ff;
+            font-weight: 600;
         }
 
         /* Main Content */
         .main {
             padding: 2rem 0;
+            min-height: 600px;
         }
 
         .page-title {
@@ -88,6 +107,21 @@
         .page-subtitle {
             color: #6b7280;
             margin-bottom: 2rem;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* KPI Cards */
@@ -127,7 +161,7 @@
             font-weight: 500;
         }
 
-        /* Campaign Table */
+        /* Tables */
         .table-container {
             background: white;
             border-radius: 8px;
@@ -183,7 +217,7 @@
             color: #92400e;
         }
 
-        /* Email Builder */
+        /* Builder */
         .builder-container {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -191,7 +225,7 @@
             margin-bottom: 2rem;
         }
 
-        .builder-sidebar {
+        .builder-sidebar, .builder-main {
             background: white;
             padding: 1.5rem;
             border-radius: 8px;
@@ -199,17 +233,16 @@
         }
 
         .builder-main {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             min-height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px dashed #e5e7eb;
+            text-align: center;
+            color: #6b7280;
         }
 
+        /* Forms */
         .form-group {
             margin-bottom: 1rem;
         }
@@ -221,32 +254,21 @@
             color: #374151;
         }
 
-        .form-input, .form-select {
+        .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #d1d5db;
             border-radius: 6px;
             font-size: 0.875rem;
-        }
-
-        .form-input:focus, .form-select:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .form-textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            resize: vertical;
-            min-height: 120px;
             font-family: inherit;
         }
 
-        .form-textarea:focus {
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
@@ -257,13 +279,12 @@
             padding: 0.75rem 1.5rem;
             background: #2563eb;
             color: white;
-            text-decoration: none;
+            border: none;
             border-radius: 6px;
             font-weight: 500;
-            border: none;
             cursor: pointer;
-            transition: all 0.2s;
             font-size: 0.875rem;
+            transition: all 0.2s;
         }
 
         .btn:hover {
@@ -282,7 +303,7 @@
             color: white;
         }
 
-        /* Contact Form Styles */
+        /* Contact */
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -290,14 +311,7 @@
             margin-bottom: 2rem;
         }
 
-        .contact-info {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .contact-form {
+        .contact-info, .contact-form {
             background: white;
             padding: 2rem;
             border-radius: 8px;
@@ -342,22 +356,7 @@
             gap: 1rem;
         }
 
-        /* Page Sections */
-        .page-section {
-            display: none;
-        }
-
-        .page-section.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Chatbot Styles */
+        /* Chatbot */
         .chatbot-container {
             position: fixed;
             bottom: 20px;
@@ -375,7 +374,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
         .chatbot-toggle:hover {
@@ -413,7 +412,6 @@
 
         .chatbot-title {
             font-weight: 600;
-            font-size: 1rem;
         }
 
         .chatbot-close {
@@ -422,10 +420,6 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            line-height: 1;
         }
 
         .chatbot-messages {
@@ -438,30 +432,11 @@
         .message {
             margin-bottom: 1rem;
             display: flex;
-            align-items: flex-start;
             gap: 0.5rem;
         }
 
         .message.user {
             flex-direction: row-reverse;
-        }
-
-        .message-bubble {
-            max-width: 80%;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            font-size: 0.9rem;
-        }
-
-        .message.bot .message-bubble {
-            background: white;
-            color: #374151;
-            border: 1px solid #e5e7eb;
-        }
-
-        .message.user .message-bubble {
-            background: #2563eb;
-            color: white;
         }
 
         .message-avatar {
@@ -485,6 +460,24 @@
             color: white;
         }
 
+        .message-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .message.bot .message-bubble {
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        .message.user .message-bubble {
+            background: #2563eb;
+            color: white;
+        }
+
         .chatbot-input-area {
             padding: 1rem;
             border-top: 1px solid #e5e7eb;
@@ -502,7 +495,6 @@
             border: 1px solid #d1d5db;
             border-radius: 20px;
             outline: none;
-            font-size: 0.9rem;
         }
 
         .chatbot-send {
@@ -512,7 +504,6 @@
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.9rem;
         }
 
         .quick-actions {
@@ -529,54 +520,20 @@
             border-radius: 20px;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .quick-action:hover {
-            background: #f3f4f6;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .chatbot-window {
-                width: 300px;
-                height: 400px;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
             .header-content {
                 flex-direction: column;
-                gap: 1rem;
             }
-
-            .tagline {
-                margin-left: 0;
-                text-align: center;
-            }
-
             .nav {
-                gap: 0.5rem;
-                flex-wrap: wrap;
+                width: 100%;
                 justify-content: center;
             }
-
-            .nav button {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.9rem;
-            }
-
-            .builder-container {
+            .builder-container, .contact-container, .form-row {
                 grid-template-columns: 1fr;
             }
-
             .kpi-grid {
                 grid-template-columns: 1fr;
             }
@@ -587,15 +544,15 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                <div class="logo-area">
                     <div class="logo">📊 Adeos</div>
                     <div class="tagline">Beyond Email Marketing - We Orchestrate Customer Journeys</div>
                 </div>
                 <nav class="nav">
-                    <button class="nav-btn active" data-page="dashboard">Dashboard</button>
-                    <button class="nav-btn" data-page="campaigns">Campaigns</button>
-                    <button class="nav-btn" data-page="analytics">Analytics</button>
-                    <button class="nav-btn" data-page="contact">Contact</button>
+                    <button class="nav-btn active" id="btn-dashboard">Dashboard</button>
+                    <button class="nav-btn" id="btn-campaigns">Campaigns</button>
+                    <button class="nav-btn" id="btn-analytics">Analytics</button>
+                    <button class="nav-btn" id="btn-contact">Contact</button>
                 </nav>
             </div>
         </div>
@@ -603,33 +560,30 @@
 
     <main class="main">
         <div class="container">
-            <!-- Dashboard Section -->
-            <div id="dashboard" class="page-section active">
+            <!-- Dashboard -->
+            <div id="page-dashboard" class="page-section show">
                 <h1 class="page-title">Marketing Dashboard</h1>
                 <p class="page-subtitle">Overview of your email marketing performance</p>
 
                 <div class="kpi-grid">
                     <div class="kpi-card">
                         <div class="kpi-title">Total Subscribers</div>
-                        <div class="kpi-value" id="subscribers">24,847</div>
+                        <div class="kpi-value">24,847</div>
                         <div class="kpi-change">↗ +12% this month</div>
                     </div>
-
                     <div class="kpi-card">
                         <div class="kpi-title">Open Rate</div>
-                        <div class="kpi-value" id="open-rate">28.3%</div>
+                        <div class="kpi-value">28.3%</div>
                         <div class="kpi-change">↗ +3.2% from last month</div>
                     </div>
-
                     <div class="kpi-card">
                         <div class="kpi-title">Click Rate</div>
-                        <div class="kpi-value" id="click-rate">4.7%</div>
+                        <div class="kpi-value">4.7%</div>
                         <div class="kpi-change">↗ +1.8% from last month</div>
                     </div>
-
                     <div class="kpi-card">
                         <div class="kpi-title">Revenue</div>
-                        <div class="kpi-value" id="revenue">$47,320</div>
+                        <div class="kpi-value">$47,320</div>
                         <div class="kpi-change">↗ +18% this month</div>
                     </div>
                 </div>
@@ -679,8 +633,8 @@
                 </div>
             </div>
 
-            <!-- Campaigns Section -->
-            <div id="campaigns" class="page-section">
+            <!-- Campaigns -->
+            <div id="page-campaigns" class="page-section">
                 <h1 class="page-title">Email Campaigns</h1>
                 <p class="page-subtitle">Create and manage your email marketing campaigns</p>
 
@@ -692,27 +646,22 @@
                 <div class="builder-container">
                     <div class="builder-sidebar">
                         <h3 style="margin-bottom: 1rem;">Campaign Settings</h3>
-                        
                         <div class="form-group">
                             <label class="form-label">Campaign Name</label>
                             <input type="text" class="form-input" placeholder="Enter campaign name">
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">Subject Line</label>
                             <input type="text" class="form-input" placeholder="Your email subject">
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">Target Audience</label>
                             <select class="form-select">
                                 <option>All Subscribers</option>
                                 <option>VIP Customers</option>
                                 <option>New Subscribers</option>
-                                <option>Inactive Users</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">Send Time</label>
                             <select class="form-select">
@@ -721,12 +670,10 @@
                                 <option>Drip Campaign</option>
                             </select>
                         </div>
-
-                        <button class="btn" style="width: 100%; margin-top: 1rem;">🚀 Launch Campaign</button>
+                        <button class="btn" style="width: 100%;">🚀 Launch Campaign</button>
                     </div>
-
                     <div class="builder-main">
-                        <div style="text-align: center; color: #6b7280;">
+                        <div>
                             <div style="font-size: 3rem; margin-bottom: 1rem;">✉️</div>
                             <h3 style="margin-bottom: 1rem;">Email Builder</h3>
                             <p>Design your email campaign with our drag-and-drop editor</p>
@@ -736,8 +683,8 @@
                 </div>
             </div>
 
-            <!-- Analytics Section -->
-            <div id="analytics" class="page-section">
+            <!-- Analytics -->
+            <div id="page-analytics" class="page-section">
                 <h1 class="page-title">Performance Analytics</h1>
                 <p class="page-subtitle">Deep insights into your email marketing performance</p>
 
@@ -747,19 +694,16 @@
                         <div class="kpi-value">26.8%</div>
                         <div class="kpi-change">Industry avg: 21.3%</div>
                     </div>
-
                     <div class="kpi-card">
                         <div class="kpi-title">Best Performing Day</div>
                         <div class="kpi-value">Tuesday</div>
                         <div class="kpi-change">32.4% open rate</div>
                     </div>
-
                     <div class="kpi-card">
                         <div class="kpi-title">Top Segment</div>
                         <div class="kpi-value">VIP Customers</div>
                         <div class="kpi-change">45.2% engagement</div>
                     </div>
-
                     <div class="kpi-card">
                         <div class="kpi-title">Revenue Per Email</div>
                         <div class="kpi-value">$3.84</div>
@@ -808,15 +752,14 @@
                 </div>
             </div>
 
-            <!-- Contact Section -->
-            <div id="contact" class="page-section">
+            <!-- Contact -->
+            <div id="page-contact" class="page-section">
                 <h1 class="page-title">Get in Touch</h1>
-                <p class="page-subtitle">Ready to boost your email marketing ROI? Let's discuss how Adeos can transform your customer journeys.</p>
+                <p class="page-subtitle">Ready to boost your email marketing ROI?</p>
 
                 <div class="contact-container">
                     <div class="contact-info">
                         <h3 style="margin-bottom: 1.5rem; color: #1f2937;">Contact Information</h3>
-                        
                         <div class="contact-item">
                             <div class="contact-icon">📧</div>
                             <div class="contact-details">
@@ -824,7 +767,6 @@
                                 <p>hello@adeos.com</p>
                             </div>
                         </div>
-
                         <div class="contact-item">
                             <div class="contact-icon">📱</div>
                             <div class="contact-details">
@@ -832,84 +774,50 @@
                                 <p>+1 (555) 123-4567</p>
                             </div>
                         </div>
-
                         <div class="contact-item">
                             <div class="contact-icon">🏢</div>
                             <div class="contact-details">
                                 <h4>Office</h4>
-                                <p>123 Marketing Street<br>Seattle, WA 98101</p>
+                                <p>Seattle, WA 98101</p>
                             </div>
                         </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">⏰</div>
-                            <div class="contact-details">
-                                <h4>Business Hours</h4>
-                                <p>Monday - Friday<br>9:00 AM - 6:00 PM PST</p>
-                            </div>
-                        </div>
-
                         <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f7ff; border-radius: 6px;">
                             <h4 style="color: #2563eb; margin-bottom: 0.5rem;">🚀 Free Consultation</h4>
-                            <p style="color: #6b7280; font-size: 0.875rem;">Schedule a 30-minute strategy session to see how we can increase your email ROI by up to 340%.</p>
+                            <p style="color: #6b7280; font-size: 0.875rem;">See how we can increase your email ROI by up to 340%.</p>
                         </div>
                     </div>
 
                     <div class="contact-form">
                         <h3 style="margin-bottom: 1.5rem; color: #1f2937;">Send us a Message</h3>
-
-                        <!-- NETLIFY READY CONTACT FORM -->
                         <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                             <input type="hidden" name="form-name" value="contact">
-                            
                             <p style="display: none;">
-                                <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                                <label>Don't fill: <input name="bot-field"></label>
                             </p>
-
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">First Name *</label>
-                                    <input type="text" class="form-input" name="firstName" required placeholder="John">
+                                    <input type="text" class="form-input" name="firstName" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Last Name *</label>
-                                    <input type="text" class="form-input" name="lastName" required placeholder="Doe">
+                                    <input type="text" class="form-input" name="lastName" required>
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">Email *</label>
-                                    <input type="email" class="form-input" name="email" required placeholder="john@company.com">
+                                    <input type="email" class="form-input" name="email" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Company</label>
-                                    <input type="text" class="form-input" name="company" placeholder="Your Company">
+                                    <input type="text" class="form-input" name="company">
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Phone</label>
-                                <input type="tel" class="form-input" name="phone" placeholder="+1 (555) 123-4567">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">How can we help you? *</label>
-                                <select class="form-select" name="inquiry" required>
-                                    <option value="">Select an option</option>
-                                    <option value="demo">Request a Demo</option>
-                                    <option value="pricing">Pricing Information</option>
-                                    <option value="integration">CRM Integration</option>
-                                    <option value="support">Technical Support</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-
                             <div class="form-group">
                                 <label class="form-label">Message *</label>
-                                <textarea class="form-textarea" name="message" required placeholder="Tell us about your email marketing needs..."></textarea>
+                                <textarea class="form-textarea" name="message" required></textarea>
                             </div>
-
                             <button type="submit" class="btn" style="width: 100%;">Send Message 📧</button>
                         </form>
                     </div>
@@ -920,31 +828,26 @@
 
     <!-- Chatbot -->
     <div class="chatbot-container">
-        <button class="chatbot-toggle" id="chatbotToggle">💬</button>
-        
-        <div class="chatbot-window" id="chatbot">
+        <button class="chatbot-toggle" id="chatToggle">💬</button>
+        <div class="chatbot-window" id="chatWindow">
             <div class="chatbot-header">
                 <div class="chatbot-title">Adeos Assistant</div>
-                <button class="chatbot-close" id="chatbotClose">×</button>
+                <button class="chatbot-close" id="chatClose">×</button>
             </div>
-            
             <div class="chatbot-messages" id="chatMessages">
                 <div class="message bot">
                     <div class="message-avatar">🤖</div>
-                    <div class="message-bubble">
-                        Hi! I'm your Adeos marketing assistant. How can I help you today?
-                    </div>
+                    <div class="message-bubble">Hi! I'm your Adeos assistant. How can I help?</div>
                 </div>
                 <div class="quick-actions">
-                    <button class="quick-action" data-message="How does email automation work?">Email Automation</button>
-                    <button class="quick-action" data-message="Show me analytics features">Analytics</button>
-                    <button class="quick-action" data-message="CRM integration options">CRM Integration</button>
+                    <button class="quick-action" onclick="quickMsg('How does automation work?')">Automation</button>
+                    <button class="quick-action" onclick="quickMsg('Show analytics features')">Analytics</button>
+                    <button class="quick-action" onclick="quickMsg('CRM integrations')">CRM</button>
                 </div>
             </div>
-            
             <div class="chatbot-input-area">
                 <div class="chatbot-input-group">
-                    <input type="text" class="chatbot-input" id="chatInput" placeholder="Ask about our marketing features...">
+                    <input type="text" class="chatbot-input" id="chatInput" placeholder="Ask about features...">
                     <button class="chatbot-send" id="chatSend">Send</button>
                 </div>
             </div>
@@ -952,200 +855,35 @@
     </div>
 
     <script>
-        // ==========================================
-        // PAGE NAVIGATION - COMPLETELY REWRITTEN
-        // ==========================================
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all navigation buttons
-            const navButtons = document.querySelectorAll('.nav-btn');
-            const pageSections = document.querySelectorAll('.page-section');
-            
-            // Add click event to each button
-            navButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    // Get the page to show
-                    const pageToShow = this.getAttribute('data-page');
-                    
-                    // Hide all pages
-                    pageSections.forEach(function(section) {
-                        section.classList.remove('active');
-                    });
-                    
-                    // Show selected page
-                    document.getElementById(pageToShow).classList.add('active');
-                    
-                    // Update active button
-                    navButtons.forEach(function(btn) {
-                        btn.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    // Scroll to top
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                });
-            });
-            
-            // Animate KPI numbers on load
-            animateKPIs();
-        });
+// Navigation
+document.getElementById('btn-dashboard').onclick = function() { showPage('dashboard'); };
+document.getElementById('btn-campaigns').onclick = function() { showPage('campaigns'); };
+document.getElementById('btn-analytics').onclick = function() { showPage('analytics'); };
+document.getElementById('btn-contact').onclick = function() { showPage('contact'); };
 
-        // ==========================================
-        // ANIMATE KPI VALUES
-        // ==========================================
-        
-        function animateKPIs() {
-            const subscribers = document.getElementById('subscribers');
-            const revenue = document.getElementById('revenue');
-            
-            if (subscribers) {
-                animateNumber(subscribers, 0, 24847, 2000);
-            }
-            
-            if (revenue) {
-                animateRevenue(revenue, 0, 47320, 2000);
-            }
-        }
-        
-        function animateNumber(element, start, end, duration) {
-            const startTime = performance.now();
-            
-            function update(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const current = Math.floor(progress * (end - start) + start);
-                element.textContent = current.toLocaleString();
-                
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                }
-            }
-            
-            requestAnimationFrame(update);
-        }
-        
-        function animateRevenue(element, start, end, duration) {
-            const startTime = performance.now();
-            
-            function update(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const current = Math.floor(progress * end);
-                element.textContent = ' + current.toLocaleString();
-                
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                }
-            }
-            
-            requestAnimationFrame(update);
-        }
+function showPage(page) {
+    // Hide all pages
+    var pages = document.querySelectorAll('.page-section');
+    for (var i = 0; i < pages.length; i++) {
+        pages[i].classList.remove('show');
+    }
+    
+    // Show selected page
+    document.getElementById('page-' + page).classList.add('show');
+    
+    // Update nav buttons
+    var btns = document.querySelectorAll('.nav-btn');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.remove('active');
+    }
+    document.getElementById('btn-' + page).classList.add('active');
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
 
-        // ==========================================
-        // CHATBOT FUNCTIONALITY
-        // ==========================================
-        
-        const chatbotToggle = document.getElementById('chatbotToggle');
-        const chatbotClose = document.getElementById('chatbotClose');
-        const chatbotWindow = document.getElementById('chatbot');
-        const chatInput = document.getElementById('chatInput');
-        const chatSend = document.getElementById('chatSend');
-        const chatMessages = document.getElementById('chatMessages');
-        
-        // Toggle chatbot
-        chatbotToggle.addEventListener('click', function() {
-            chatbotWindow.classList.toggle('open');
-            if (chatbotWindow.classList.contains('open')) {
-                chatbotToggle.textContent = '×';
-                setTimeout(() => chatInput.focus(), 100);
-            } else {
-                chatbotToggle.textContent = '💬';
-            }
-        });
-        
-        // Close chatbot
-        chatbotClose.addEventListener('click', function() {
-            chatbotWindow.classList.remove('open');
-            chatbotToggle.textContent = '💬';
-        });
-        
-        // Send message
-        chatSend.addEventListener('click', sendChatMessage);
-        chatInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendChatMessage();
-            }
-        });
-        
-        // Quick action buttons
-        document.querySelectorAll('.quick-action').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const message = this.getAttribute('data-message');
-                addChatMessage(message, 'user');
-                setTimeout(function() {
-                    const response = getBotResponse(message);
-                    addChatMessage(response, 'bot');
-                }, 800);
-            });
-        });
-        
-        function sendChatMessage() {
-            const message = chatInput.value.trim();
-            if (message) {
-                addChatMessage(message, 'user');
-                chatInput.value = '';
-                
-                setTimeout(function() {
-                    const response = getBotResponse(message);
-                    addChatMessage(response, 'bot');
-                }, 1000);
-            }
-        }
-        
-        function addChatMessage(text, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message ' + sender;
-            
-            const avatar = document.createElement('div');
-            avatar.className = 'message-avatar';
-            avatar.textContent = sender === 'bot' ? '🤖' : '👤';
-            
-            const bubble = document.createElement('div');
-            bubble.className = 'message-bubble';
-            bubble.textContent = text;
-            
-            messageDiv.appendChild(avatar);
-            messageDiv.appendChild(bubble);
-            chatMessages.appendChild(messageDiv);
-            
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        
-        function getBotResponse(message) {
-            const lowerMessage = message.toLowerCase();
-            
-            if (lowerMessage.includes('automation') || lowerMessage.includes('email')) {
-                return 'Our email automation creates triggered campaigns based on customer behavior. Set up welcome series, cart abandonment, and re-engagement flows automatically!';
-            }
-            
-            if (lowerMessage.includes('analytics') || lowerMessage.includes('performance')) {
-                return 'Track open rates, click-through rates, conversions, and revenue attribution. Our dashboard shows real-time performance with advanced segmentation!';
-            }
-            
-            if (lowerMessage.includes('crm') || lowerMessage.includes('integration')) {
-                return 'Adeos integrates with Salesforce, HubSpot, Pipedrive, and 50+ CRMs. Sync data and create targeted campaigns based on CRM segments!';
-            }
-            
-            if (lowerMessage.includes('demo') || lowerMessage.includes('show')) {
-                return 'Great! You can explore our dashboard above, or contact us for a personalized demo to see how Adeos can boost your marketing ROI by up to 340%!';
-            }
-            
-            if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
-                return 'We offer flexible pricing starting at $29/month for small businesses, with enterprise plans available. All plans include automation, analytics, and CRM integration.';
-            }
-            
-            return "That's a great question! I can help you learn about our email automation, analytics, or CRM integration features. What would you like to know more about?";
-        }
-    </script>
-</body>
-</html>
+// Chatbot
+document.getElementById('chatToggle').onclick = function() {
+    var win = document.getElementById('chatWindow');
+    var btn = document.getElementById('chatToggle');
+    if (win.classList.contains('
